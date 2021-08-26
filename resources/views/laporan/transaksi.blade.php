@@ -19,7 +19,7 @@
               <div class="card">
 
                 <div class="card-body">
-                  <h4 class="card-title">Laporan Transaksi</h4>
+                  <h4 class="card-title">Laporan Realisasi Anggaran</h4>
                   <div class="btn-group dropdown">
                           <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <b><i class="fa fa-download"></i> Export PDF</b>

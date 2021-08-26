@@ -55,11 +55,22 @@
               <span class="menu-title">Transaksi</span>
             </a>
           </li> -->
-          <li class="nav-item {{ setActive(['keuangan*']) }}">
-            <a class="nav-link" href="{{route('keuangan.index')}}">
+          <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="#ui-keuangan" aria-expanded="false" aria-controls="ui-keuangan">
               <i class="menu-icon mdi mdi-calculator"></i>
               <span class="menu-title">Keuangan</span>
+              <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="ui-keuangan">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+                  <a class="nav-link" href="{{route('keuangan.index')}}">by Bulan</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/">by Kegiatan</a>
+                </li>
+              </ul>
+            </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-laporan" aria-expanded="false" aria-controls="ui-laporan">
@@ -70,16 +81,16 @@
             <div class="collapse" id="ui-laporan">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="{{url('laporan/trs')}}">Laporan Transaksi</a>
+                  <a class="nav-link" href="{{url('laporan/trs')}}">Realisasi Anggaran</a>
                 </li>
                 <!--
                 <li class="nav-item">
                   <a class="nav-link" href="">Laporan Anggota</a>
                 </li>
                 -->
-                 <li class="nav-item">
+                 <!-- <li class="nav-item">
                   <a class="nav-link" href="{{url('laporan/buku')}}">Laporan Buku</a>
-                </li>
+                </li> -->
               </ul>
             </div>
           </li>
