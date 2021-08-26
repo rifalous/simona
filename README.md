@@ -1,12 +1,12 @@
-# Sistem Peminjaman Buku (Perpusku)
+# Sistem Informasi Monitoring Keuangan (SIMONA)
 ## Instalasi
- - clone projek ini https://github.com/ggramadhan/laravel-perpustakaan-sederhana.git
+ - clone projek ini https://github.com/rifalous/simona.git
  - jalankan
     ```
     composer update
     ```
  - rename .env copy.example menjadi .env
- - buat database di phpmyadmin dengan nama 'perpusku_db' atau dengan nama database yang kamu inginkan
+ - buat database di phpmyadmin dengan nama 'db_simona' atau dengan nama database yang kamu inginkan
  - melakukan setup .env sesuaikan dengan nama database yg dibuat beserta username dan password
  - jalankan
     ``` 
