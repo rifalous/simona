@@ -61,19 +61,24 @@
               <span class="menu-title">Keuangan</span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="ui-keuangan">
+            <div class="collapse {{ setShow(['keuangan*', 'transaksi*']) }}" id="ui-keuangan">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="{{route('keuangan.index')}}">by Bulan</a>
+                  <a class="nav-link {{ setActive(['keuangan*']) }}" href="{{route('keuangan.index')}}">by Bulan</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/">by Kegiatan</a>
-                </li>
+                <!-- <li class="nav-item {{ setActive(['transaksi*']) }}">
+                  <a class="nav-link" href="{{route('transaksi.index')}}">
+                   by Kegiatan
+                  </a>
+                </li> -->
+                <!-- <li class="nav-item">
+                  <a class="nav-link {{ setActive(['transaksi*']) }}" href="{{route('transaksi.index')}}">by Kegiatan</a>
+                </li> -->
               </ul>
             </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-laporan" aria-expanded="false" aria-controls="ui-laporan">
+          <li class="nav-item {{ setActive(['laporan*']) }}">
+            <a class="nav-link " data-toggle="collapse" href="#ui-laporan" aria-expanded="false" aria-controls="ui-laporan">
               <i class="menu-icon mdi mdi-table"></i>
               <span class="menu-title">Laporan</span>
               <i class="menu-arrow"></i>
@@ -81,16 +86,8 @@
             <div class="collapse" id="ui-laporan">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="{{url('laporan/trs')}}">Realisasi Anggaran</a>
+                  <a class="nav-link {{ setActive(['laporan*']) }}" href="{{url('laporan/ra')}}">Realisasi Anggaran</a>
                 </li>
-                <!--
-                <li class="nav-item">
-                  <a class="nav-link" href="">Laporan Anggota</a>
-                </li>
-                -->
-                 <!-- <li class="nav-item">
-                  <a class="nav-link" href="{{url('laporan/buku')}}">Laporan Buku</a>
-                </li> -->
               </ul>
             </div>
           </li>

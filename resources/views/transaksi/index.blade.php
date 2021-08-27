@@ -1,9 +1,8 @@
-
 @section('js')
 <script type="text/javascript">
   $(document).ready(function() {
     $('#table').DataTable({
-      "iDisplayLength": 50
+      "iDisplayLength": 10
     });
 
 } );
@@ -14,9 +13,9 @@
 @section('content')
 <div class="row">
 
-  <div class="col-lg-2">
+  <!-- <div class="col-lg-2">
     <a href="{{ route('transaksi.create') }}" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-plus"></i> Tambah Transaksi</a>
-  </div>
+  </div> -->
     <div class="col-lg-12">
                   @if (Session::has('message'))
                   <div class="alert alert-{{ Session::get('message_type') }}" id="waktu2" style="margin-top:10px;">{{ Session::get('message') }}</div>
@@ -28,107 +27,123 @@
               <div class="card">
 
                 <div class="card-body">
-                  <h4 class="card-title">Data Transaksi</h4>
+                  <h4 class="card-title">Data Keuangan - Berdasarkan Kegiatan</h4>
                   
                   <div class="table-responsive">
                     <table class="table table-striped" id="table">
                       <thead>
                         <tr>
+                          <th rowspan="2">
+                            ID Master
+                          </th>
+                          <th rowspan="2">
+                            Uraian
+                          </th>
+                          <th colspan="4" align="center">
+                            Anggaran
+                          </th>
+                          <th colspan="4" align="center">
+                            Realisasi
+                          </th>
+                          <th rowspan="2">
+                            Bulan & Tahun
+                          </th>
+                        </tr>
+                        <tr>
                           <th>
-                            Kode
+                            Volume
                           </th>
                           <th>
-                            Buku
+                            Satuan
                           </th>
                           <th>
-                            Peminjam
+                            Harga
                           </th>
                           <th>
-                            Tgl Pinjam
+                            Total
                           </th>
                           <th>
-                            Tgl Kembali
+                            Volume
                           </th>
                           <th>
-                            Status
+                            Satuan
                           </th>
                           <th>
-                            Action
+                            Harga
+                          </th>
+                          <th>
+                            Total
                           </th>
                         </tr>
                       </thead>
                       <tbody>
-                      @foreach($datas as $data)
+                      @foreach($getDataAnggaran as $dataAnggaran)
                         <tr>
                           <td class="py-1">
-                          <a href="{{route('transaksi.show', $data->id)}}"> 
-                            {{$data->kode_transaksi}}
-                          </a>
+                            {{ $dataAnggaran->id_master }}
                           </td>
                           <td>
-                          
-                            {{$data->buku->judul}}
-                          
-                          </td>
-
-                          <td>
-                            {{$data->anggota->nama}}
+                            {{ $dataAnggaran->kd_rincian.' - '.$dataAnggaran->det_rincian }}
                           </td>
                           <td>
-                           {{date('d/m/y', strtotime($data->tgl_pinjam))}}
+                            {{ $dataAnggaran->vol_anggaran }}
                           </td>
                           <td>
-                            {{date('d/m/y', strtotime($data->tgl_kembali))}}
+                            {{ $dataAnggaran->satuan_anggaran }}
                           </td>
                           <td>
-                          @if($data->status == 'pinjam')
-                            <label class="badge badge-warning">Pinjam</label>
-                          @else
-                            <label class="badge badge-success">Kembali</label>
-                          @endif
+                            {{"Rp. ".number_format($dataAnggaran->harga_anggaran)}}
                           </td>
                           <td>
-                          @if(Auth::user()->level == 'admin')
-                          <div class="btn-group dropdown">
-                          <button type="button" class="btn btn-success dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Action
-                          </button>
-                          <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 30px, 0px);">
-                          @if($data->status == 'pinjam')
-                          <form action="{{ route('transaksi.update', $data->id) }}" method="post" enctype="multipart/form-data">
-                            {{ csrf_field() }}
-                            {{ method_field('put') }}
-                            <button class="dropdown-item" onclick="return confirm('Anda yakin data ini sudah kembali?')"> Sudah Kembali
-                            </button>
-                          </form>
-                          @endif
-                            <form action="{{ route('transaksi.destroy', $data->id) }}" class="pull-left"  method="post">
-                            {{ csrf_field() }}
-                            {{ method_field('delete') }}
-                            <button class="dropdown-item" onclick="return confirm('Anda yakin ingin menghapus data ini?')"> Delete
-                            </button>
-                          </form>
-                          </div>
-                        </div>
-                        @else
-                        @if($data->status == 'pinjam')
-                        <form action="{{ route('transaksi.update', $data->id) }}" method="post" enctype="multipart/form-data">
-                            {{ csrf_field() }}
-                            {{ method_field('put') }}
-                            <button class="btn btn-info btn-xs" onclick="return confirm('Anda yakin data ini sudah kembali?')">Sudah Kembali
-                            </button>
-                          </form>
-                          @else
-                          -
-                          @endif
-                        @endif
+                            {{"Rp. ".number_format($dataAnggaran->total_anggaran)}}
+                          </td>
+                          <td>
+                            {{ $dataAnggaran->vol_realisasi }}
+                          </td>
+                          <td>
+                            {{ $dataAnggaran->satuan_realisasi }}
+                          </td>
+                          <td>
+                            {{"Rp. ".number_format($dataAnggaran->harga_realisasi)}}
+                          </td>
+                          <td>
+                            {{"Rp. ".number_format($dataAnggaran->total_realisasi)}}
+                          </td>
+                          <td>
+                          @php
+                            if ($dataAnggaran->bulan == 1) 
+                              echo "Januari";
+                            else if ($dataAnggaran->bulan == 2)
+                              echo "Februari";
+                            else if ($dataAnggaran->bulan == 3)
+                              echo "Maret";
+                            else if ($dataAnggaran->bulan == 4)
+                              echo "April";
+                            else if ($dataAnggaran->bulan == 5)
+                              echo "Mei";
+                            else if ($dataAnggaran->bulan == 6)
+                              echo "Juni";
+                            else if ($dataAnggaran->bulan == 7)
+                              echo "Juli";
+                            else if ($dataAnggaran->bulan == 8)
+                              echo "Agustus";
+                            else if ($dataAnggaran->bulan == 9)
+                              echo "September";
+                            else if ($dataAnggaran->bulan == 10)
+                              echo "Oktober";
+                            else if ($dataAnggaran->bulan == 11)
+                              echo "November";
+                            else if ($dataAnggaran->bulan == 12)
+                              echo "Desember";
+                          @endphp
+                            {{ ' '.$dataAnggaran->tahun }}
                           </td>
                         </tr>
                       @endforeach
                       </tbody>
                     </table>
                   </div>
-               {{--  {!! $datas->links() !!} --}}
+               {{--  {!! $getDataAnggaran->links() !!} --}}
                 </div>
               </div>
             </div>

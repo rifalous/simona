@@ -1,4 +1,3 @@
-
 @section('js')
 <script type="text/javascript">
   $(document).ready(function() {
@@ -28,7 +27,7 @@
               <div class="card">
 
                 <div class="card-body">
-                  <h4 class="card-title">Data Keuangan</h4>
+                  <h4 class="card-title">Data Keuangan - Berdasarkan Bulan</h4>
                   
                   <div class="table-responsive">
                     <table class="table table-striped" id="table">
@@ -85,10 +84,10 @@
                             Action
                           </button>
                           <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 30px, 0px);">
-                            <form action="{{ route('keuangan.update', $data['no']) }}" method="post" enctype="multipart/form-data">
+                            <form action="{{route('transaksi.index')}}" method="get" enctype="multipart/form-data">
                               {{ csrf_field() }}
                               {{ method_field('put') }}
-                              <button class="dropdown-item" onclick="return confirm('Anda yakin data ini sudah kembali?')"> Lihat Anggaran
+                              <button class="dropdown-item"> Lihat Anggaran
                               </button>
                             </form>  
                           </div>

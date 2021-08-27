@@ -93,6 +93,63 @@ class KeuanganController extends Controller
         // return response()->json(['months', 'anggaran', 'realisasi', 'persenAnggaran', 'persenRealisasi']);
         // return response()->json([$anggaran, $realisasi], 200);
     }
+    
+    public function kegiatan()
+    {
+        // $bulanini = date('m');
+        // $total_anggaran = AnggaranKas::sum('anggaran');
+        // $total_realisasi = DetailRealisasi::sum('realisasi');
+
+        // $anggaran = array();
+        // $realisasi = array();
+        // $persenAnggaran = array();
+        // $persenRealisasi = array();
+        // $months = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+        
+        // $keuangan = array();
+        // $dataKeuangan = array();
+        // $i = 1;
+        // foreach ($months as $month) {
+        //     $keuangan['no'] = $i;
+        //     $keuangan['bulan'] = $month;
+
+        //     $query1 = AnggaranKas::where('bulan', '<=', $i)->sum('anggaran');
+        //     $keuangan['anggaran'] = $query1;
+
+        //     $query1 = ($query1 / $total_anggaran)*100;
+        //     $query1 = number_format((float)$query1, 2, '.', '');
+        //     $keuangan['persenAnggaran'] = $query1;
+
+        //     $query2 = DetailRealisasi::where('bulan', '<=', $i)->sum('realisasi');
+        //     if ($i >= $bulanini) {
+        //         $keuangan['realisasi'] = 0;
+        //     }
+        //     else {
+        //         $keuangan['realisasi'] = $query2;
+        //     }
+
+        //     $query2 = ($query2 / $total_anggaran)*100;
+        //     $query2 = number_format((float)$query2, 2, '.', '');
+        //     if ($i >= $bulanini) {
+        //         $keuangan['persenRealisasi'] = 0;
+        //     }
+        //     else {
+        //         $keuangan['persenRealisasi'] = $query2;
+        //     }
+        //     array_push($dataKeuangan, $keuangan);
+        //     $i++;
+        // }
+
+        // return response()->json($dataKeuangan, 200);
+        // return view('keuangan.kegiatan', compact('dataKeuangan'));
+        // return response()->json(['months', 'anggaran', 'realisasi', 'persenAnggaran', 'persenRealisasi']);
+        // return response()->json([$anggaran, $realisasi], 200);
+
+    
+        // return view('keuangan.kegiatan');
+    
+        return "ANJING";
+    }
 
     /**
      * Show the form for creating a new resource.
