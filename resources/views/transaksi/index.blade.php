@@ -13,9 +13,11 @@
 @section('content')
 <div class="row">
 
-  <!-- <div class="col-lg-2">
-    <a href="{{ route('transaksi.create') }}" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-plus"></i> Tambah Transaksi</a>
-  </div> -->
+  <div class="col-lg-2">
+  
+    <!-- <a href="{{ route('transaksi.create') }}" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-plus"></i> Tambah Transaksi</a> -->
+    
+  </div>
     <div class="col-lg-12">
                   @if (Session::has('message'))
                   <div class="alert alert-{{ Session::get('message_type') }}" id="waktu2" style="margin-top:10px;">{{ Session::get('message') }}</div>
@@ -28,6 +30,54 @@
 
                 <div class="card-body">
                   <h4 class="card-title">Data Keuangan - Berdasarkan Kegiatan</h4>
+                  <div class="row flex-grow">
+                    <div class="form-group">
+                      <label for="kode_transaksi" class="col-md-12 control-label">Program</label>
+                      <div class="col-md-12">
+                        <input id="kode_transaksi" type="text" class="form-control" name="kode_transaksi" required>
+                        <span class="help-block">
+                          <strong></strong>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="kode_transaksi" class="col-md-12 control-label">Kegiatan</label>
+                      <div class="col-md-12">
+                        <input id="kode_transaksi" type="text" class="form-control" name="kode_transaksi" required>
+                        <span class="help-block">
+                          <strong></strong>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="kode_transaksi" class="col-md-12 control-label">Sub Kegiatan</label>
+                      <div class="col-md-12">
+                        <input id="kode_transaksi" type="text" class="form-control" name="kode_transaksi" required>
+                        <span class="help-block">
+                          <strong></strong>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="kode_transaksi" class="col-md-12 control-label">Bulan</label>
+                      <div class="col-md-12">
+                        <input id="kode_transaksi" type="text" class="form-control" name="kode_transaksi" required>
+                        <span class="help-block">
+                          <strong></strong>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="kode_transaksi" class="col-md-12 control-label">Tahun</label>
+                      <div class="col-md-12">
+                        <input id="kode_transaksi" type="text" class="form-control" name="kode_transaksi" required>
+                        <span class="help-block">
+                          <strong></strong>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <a href="#" style="margin-bottom:20px" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-filter"></i> Filter</a>
                   
                   <div class="table-responsive">
                     <table class="table table-striped" id="table">
