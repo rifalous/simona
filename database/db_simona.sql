@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 26, 2021 at 02:35 AM
--- Server version: 10.4.14-MariaDB
+-- Generation Time: Aug 27, 2021 at 05:04 PM
+-- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -2338,7 +2338,9 @@ INSERT INTO `t_jabatan` (`id`, `jabatan`) VALUES
 (4, 'KASI PEMBANGUNAN'),
 (5, 'KASI TRANTIBUM'),
 (6, 'KASI PEMBERDAYAAN MASYARAKAT'),
-(7, 'KASI PEMERINTAHAN');
+(7, 'KASI PEMERINTAHAN'),
+(8, 'SEKRETARIAT (GAJI & TUNJANGAN PEGAWAI)'),
+(9, 'SEKRETARIAT (BELANJA WAJIB MENGIKAT)');
 
 -- --------------------------------------------------------
 
@@ -2358,21 +2360,21 @@ CREATE TABLE `t_keg` (
 --
 
 INSERT INTO `t_keg` (`id`, `id_prog`, `kd_keg`, `nama_keg`) VALUES
-(1, 0, '7.01.01.2.03', 'Administrasi Barang Milik Daerah pada Perangkat Daerah'),
-(2, 0, '7.01.01.2.05', 'Administrasi Kepegawaian Perangkat Daerah'),
-(3, 0, '7.01.01.2.02', 'Administrasi Keuangan Perangkat Daerah'),
-(4, 0, '7.01.01.2.06', 'Administrasi Umum Perangkat Daerah'),
-(5, 0, '7.01.06.2.01', 'Fasilitasi, Rekomendasi dan Koordinasi Pembinaan dan Pengawasan Pemerintahan Desa'),
-(6, 0, '7.01.03.2.01', 'Koordinasi Kegiatan Pemberdayaan Desa '),
-(7, 0, '7.01.04.2.02', 'Koordinasi Penerapan dan Penegakan Peraturan Daerah dan Peraturan Kepala Daerah'),
-(8, 0, '7.01.02.2.01', 'Koordinasi Penyelenggaraan Kegiatan Pemerintahan di Tingkat Kecamatan'),
-(9, 0, '7.01.02.2.04', 'Pelaksanaan Urusan Pemerintahan yang Dilimpahkan kepada Camat'),
-(10, 0, '7.01.01.2.09', 'Pemeliharaan Barang Milik Daerah Penunjang Urusan Pemerintahan Daerah'),
-(11, 0, '7.01.01.2.07', 'Pengadaan Barang Milik Daerah Penunjang Urusan Pemerintah Daerah'),
-(12, 0, '7.01.01.2.08', 'Penyediaan Jasa Penunjang Urusan Pemerintahan Daerah'),
-(13, 0, '7.01.05.2.01', 'Penyelenggaraan Urusan Pemerintahan Umum sesuai Penugasan Kepala Daerah'),
-(14, 0, '7.01.02.2.02', 'Penyelenggaraan Urusan Pemerintahan yang tidak Dilaksanakan oleh Unit Kerja Perangkat Daerah yang ada di Kecamatan'),
-(15, 0, '7.01.01.2.01', 'Perencanaan, Penganggaran, dan Evaluasi Kinerja Perangkat Daerah');
+(1, 1, '7.01.01.2.03', 'Administrasi Barang Milik Daerah pada Perangkat Daerah'),
+(2, 1, '7.01.01.2.05', 'Administrasi Kepegawaian Perangkat Daerah'),
+(3, 1, '7.01.01.2.02', 'Administrasi Keuangan Perangkat Daerah'),
+(4, 1, '7.01.01.2.06', 'Administrasi Umum Perangkat Daerah'),
+(5, 6, '7.01.06.2.01', 'Fasilitasi, Rekomendasi dan Koordinasi Pembinaan dan Pengawasan Pemerintahan Desa'),
+(6, 3, '7.01.03.2.01', 'Koordinasi Kegiatan Pemberdayaan Desa '),
+(7, 4, '7.01.04.2.02', 'Koordinasi Penerapan dan Penegakan Peraturan Daerah dan Peraturan Kepala Daerah'),
+(8, 2, '7.01.02.2.01', 'Koordinasi Penyelenggaraan Kegiatan Pemerintahan di Tingkat Kecamatan'),
+(9, 2, '7.01.02.2.04', 'Pelaksanaan Urusan Pemerintahan yang Dilimpahkan kepada Camat'),
+(10, 1, '7.01.01.2.09', 'Pemeliharaan Barang Milik Daerah Penunjang Urusan Pemerintahan Daerah'),
+(11, 1, '7.01.01.2.07', 'Pengadaan Barang Milik Daerah Penunjang Urusan Pemerintah Daerah'),
+(12, 1, '7.01.01.2.08', 'Penyediaan Jasa Penunjang Urusan Pemerintahan Daerah'),
+(13, 5, '7.01.05.2.01', 'Penyelenggaraan Urusan Pemerintahan Umum sesuai Penugasan Kepala Daerah'),
+(14, 2, '7.01.02.2.02', 'Penyelenggaraan Urusan Pemerintahan yang tidak Dilaksanakan oleh Unit Kerja Perangkat Daerah yang ada di Kecamatan'),
+(15, 1, '7.01.01.2.01', 'Perencanaan, Penganggaran, dan Evaluasi Kinerja Perangkat Daerah');
 
 -- --------------------------------------------------------
 
@@ -2996,46 +2998,46 @@ CREATE TABLE `t_subkeg` (
 --
 
 INSERT INTO `t_subkeg` (`id`, `id_keg`, `kd_subkeg`, `nama_subkeg`) VALUES
-(1, 0, '7.01.01.2.01.01', 'Penyusunan Dokumen Perencanaan Perangkat Daerah'),
-(2, 0, '7.01.01.2.01.02', 'Koordinasi dan Penyusunan Dokumen RKA-SKPD'),
-(3, 0, '7.01.01.2.01.03', 'Koordinasi dan Penyusunan Dokumen Perubahan RKA SKPD'),
-(4, 0, '7.01.01.2.01.04', 'Koordinasi dan Penyusunan DPA-SKPD'),
-(5, 0, '7.01.01.2.01.05', 'Koordinasi dan Penyusunan Perubahan DPA-SKPD'),
-(6, 0, '7.01.01.2.01.06', 'Koordinasi dan Penyusunan Laporan Capaian Kinerja dan Ikhtisar Realisasi Kinerja SKPD'),
-(7, 0, '7.01.01.2.02.01', 'Penyediaan Gaji dan Tunjangan ASN'),
-(8, 0, '7.01.01.2.02.05', 'Koordinasi dan Penyusunan Laporan Keuangan Akhir Tahun SKPD'),
-(9, 0, '7.01.01.2.02.07', 'Koordinasi dan Penyusunan Laporan Keuangan Bulanan/Triwulanan/Semesteran SKPD'),
-(10, 0, '7.01.01.2.02.08', 'Penyusunan Pelaporan dan Analisis Prognosis Realisasi Anggaran'),
-(11, 0, '7.01.01.2.03.02', 'Pengamanan Barang Milik Daerah SKPD'),
-(12, 0, '7.01.01.2.05.10', 'Sosialisasi Peraturan Perundang-Undangan'),
-(13, 0, '7.01.01.2.05.02', 'Pengadaan Pakaian Dinas Beserta Atribut Kelengkapannya'),
-(14, 0, '7.01.01.2.06.01', 'Penyediaan Komponen Instalasi Listrik/Penerangan Bangunan Kantor'),
-(15, 0, '7.01.01.2.06.02', 'Penyediaan Peralatan dan Perlengkapan Kantor'),
-(16, 0, '7.01.01.2.06.03', 'Penyediaan Peralatan Rumah Tangga'),
-(17, 0, '7.01.01.2.06.04', 'Penyediaan Bahan Logistik Kantor'),
-(18, 0, '7.01.01.2.06.08', 'Fasilitasi Kunjungan Tamu'),
-(19, 0, '7.01.01.2.06.09', 'Penyelenggaraan Rapat Koordinasi dan Konsultasi SKPD'),
-(20, 0, '7.01.01.2.07.05', 'Pengadaan Mebel'),
-(21, 0, '7.01.01.2.07.06', 'Pengadaan Peralatan dan Mesin Lainnya'),
-(22, 0, '7.01.01.2.08.01', 'Penyediaan Jasa Surat Menyurat'),
-(23, 0, '7.01.01.2.08.02', 'Penyediaan Jasa Komunikasi, Sumber Daya Air dan Listrik'),
-(24, 0, '7.01.01.2.08.04', 'Penyediaan Jasa Pelayanan Umum Kantor'),
-(25, 0, '7.01.01.2.09.01', 'Penyediaan Jasa Pemeliharaan, Biaya Pemeliharaan dan Pajak Kendaraan Perorangan Dinas atau Kendaraan Dinas Jabatan'),
-(26, 0, '7.01.01.2.09.06', 'Pemeliharaan Peralatan dan Mesin Lainnya'),
-(27, 0, '7.01.01.2.09.09', 'Pemeliharaan/Rehabilitasi Gedung Kantor dan Bangunan Lainnya'),
-(28, 0, '7.01.02.2.01.02', 'Peningkatan Efektifitas Kegiatan Pemerintahan di Tingkat Kecamatan'),
-(29, 0, '7.01.02.2.02.01', 'Perencanaan Kegiatan Pelayanan kepada Masyarakat di Kecamatan'),
-(30, 0, '7.01.02.2.04.03', 'Pelaksanaan Urusan Pemerintahan yang terkait dengan Kewenangan Lain yang Dilimpahkan'),
-(31, 0, '7.01.03.2.01.03', 'Peningkatan Efektifitas Kegiatan Pemberdayaan Masyarakat di Wilayah Kecamatan'),
-(32, 0, '7.01.04.2.02.01', 'Koordinasi/Sinergi Dengan Perangkat Daerah yang Tugas dan Fungsinya di Bidang Penegakan Peraturan Perundang-Undangan dan/atau Kepolisian Negara Republik Indonesia'),
-(33, 0, '7.01.05.2.01.01', 'Pembinaan Wawasan Kebangsaan dan Ketahanan Nasional dalam rangka Memantapkan Pengamalan Pancasila, Pelaksanaan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945, Pelestarian Bhinneka Tunggal Ika serta Pemertahanan dan Pemeliharaan Keutuhan Negara K'),
-(34, 0, '7.01.05.2.01.03', 'Pembinaan Persatuan dan Kesatuan Bangsa'),
-(35, 0, '7.01.05.2.01.04', 'Pembinaan Kerukunan Antarsuku dan Intrasuku, Umat Beragama, Ras, dan Golongan Lainnya Guna Mewujudkan Stabilitas Keamanan Lokal, Regional, dan Nasional'),
-(36, 0, '7.01.05.2.01.07', 'Pelaksanaan semua Urusan Pemerintahan yang bukan merupakan Kewenangan Daerah dan tidak dilaksanakan oleh Instansi Vertikal'),
-(37, 0, '7.01.06.2.01.11', 'Fasilitasi Penyelenggaraan Ketenteraman dan Ketertiban Umum'),
-(38, 0, '7.01.06.2.01.18', 'Koordinasi Pelaksanaan Pembangunan Kawasan Perdesaan di Wilayah Kecamatan'),
-(39, 0, '7.01.06.2.01.02', 'Fasilitasi Administrasi Tata Pemerintahan Desa'),
-(40, 0, '7.01.06.2.01.09', 'Fasilitasi Sinkronisasi Perencanaan Pembangunan Daerah dengan Pembangunan Desa');
+(1, 15, '7.01.01.2.01.01', 'Penyusunan Dokumen Perencanaan Perangkat Daerah'),
+(2, 15, '7.01.01.2.01.02', 'Koordinasi dan Penyusunan Dokumen RKA-SKPD'),
+(3, 15, '7.01.01.2.01.03', 'Koordinasi dan Penyusunan Dokumen Perubahan RKA SKPD'),
+(4, 15, '7.01.01.2.01.04', 'Koordinasi dan Penyusunan DPA-SKPD'),
+(5, 15, '7.01.01.2.01.05', 'Koordinasi dan Penyusunan Perubahan DPA-SKPD'),
+(6, 15, '7.01.01.2.01.06', 'Koordinasi dan Penyusunan Laporan Capaian Kinerja dan Ikhtisar Realisasi Kinerja SKPD'),
+(7, 3, '7.01.01.2.02.01', 'Penyediaan Gaji dan Tunjangan ASN'),
+(8, 3, '7.01.01.2.02.05', 'Koordinasi dan Penyusunan Laporan Keuangan Akhir Tahun SKPD'),
+(9, 3, '7.01.01.2.02.07', 'Koordinasi dan Penyusunan Laporan Keuangan Bulanan/Triwulanan/Semesteran SKPD'),
+(10, 3, '7.01.01.2.02.08', 'Penyusunan Pelaporan dan Analisis Prognosis Realisasi Anggaran'),
+(11, 1, '7.01.01.2.03.02', 'Pengamanan Barang Milik Daerah SKPD'),
+(12, 2, '7.01.01.2.05.10', 'Sosialisasi Peraturan Perundang-Undangan'),
+(13, 2, '7.01.01.2.05.02', 'Pengadaan Pakaian Dinas Beserta Atribut Kelengkapannya'),
+(14, 4, '7.01.01.2.06.01', 'Penyediaan Komponen Instalasi Listrik/Penerangan Bangunan Kantor'),
+(15, 4, '7.01.01.2.06.02', 'Penyediaan Peralatan dan Perlengkapan Kantor'),
+(16, 4, '7.01.01.2.06.03', 'Penyediaan Peralatan Rumah Tangga'),
+(17, 4, '7.01.01.2.06.04', 'Penyediaan Bahan Logistik Kantor'),
+(18, 4, '7.01.01.2.06.08', 'Fasilitasi Kunjungan Tamu'),
+(19, 4, '7.01.01.2.06.09', 'Penyelenggaraan Rapat Koordinasi dan Konsultasi SKPD'),
+(20, 11, '7.01.01.2.07.05', 'Pengadaan Mebel'),
+(21, 11, '7.01.01.2.07.06', 'Pengadaan Peralatan dan Mesin Lainnya'),
+(22, 12, '7.01.01.2.08.01', 'Penyediaan Jasa Surat Menyurat'),
+(23, 12, '7.01.01.2.08.02', 'Penyediaan Jasa Komunikasi, Sumber Daya Air dan Listrik'),
+(24, 12, '7.01.01.2.08.04', 'Penyediaan Jasa Pelayanan Umum Kantor'),
+(25, 10, '7.01.01.2.09.01', 'Penyediaan Jasa Pemeliharaan, Biaya Pemeliharaan dan Pajak Kendaraan Perorangan Dinas atau Kendaraan Dinas Jabatan'),
+(26, 10, '7.01.01.2.09.06', 'Pemeliharaan Peralatan dan Mesin Lainnya'),
+(27, 10, '7.01.01.2.09.09', 'Pemeliharaan/Rehabilitasi Gedung Kantor dan Bangunan Lainnya'),
+(28, 8, '7.01.02.2.01.02', 'Peningkatan Efektifitas Kegiatan Pemerintahan di Tingkat Kecamatan'),
+(29, 14, '7.01.02.2.02.01', 'Perencanaan Kegiatan Pelayanan kepada Masyarakat di Kecamatan'),
+(30, 9, '7.01.02.2.04.03', 'Pelaksanaan Urusan Pemerintahan yang terkait dengan Kewenangan Lain yang Dilimpahkan'),
+(31, 6, '7.01.03.2.01.03', 'Peningkatan Efektifitas Kegiatan Pemberdayaan Masyarakat di Wilayah Kecamatan'),
+(32, 7, '7.01.04.2.02.01', 'Koordinasi/Sinergi Dengan Perangkat Daerah yang Tugas dan Fungsinya di Bidang Penegakan Peraturan Perundang-Undangan dan/atau Kepolisian Negara Republik Indonesia'),
+(33, 13, '7.01.05.2.01.01', 'Pembinaan Wawasan Kebangsaan dan Ketahanan Nasional dalam rangka Memantapkan Pengamalan Pancasila, Pelaksanaan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945, Pelestarian Bhinneka Tunggal Ika serta Pemertahanan dan Pemeliharaan Keutuhan Negara K'),
+(34, 13, '7.01.05.2.01.03', 'Pembinaan Persatuan dan Kesatuan Bangsa'),
+(35, 13, '7.01.05.2.01.04', 'Pembinaan Kerukunan Antarsuku dan Intrasuku, Umat Beragama, Ras, dan Golongan Lainnya Guna Mewujudkan Stabilitas Keamanan Lokal, Regional, dan Nasional'),
+(36, 13, '7.01.05.2.01.07', 'Pelaksanaan semua Urusan Pemerintahan yang bukan merupakan Kewenangan Daerah dan tidak dilaksanakan oleh Instansi Vertikal'),
+(37, 5, '7.01.06.2.01.11', 'Fasilitasi Penyelenggaraan Ketenteraman dan Ketertiban Umum'),
+(38, 5, '7.01.06.2.01.18', 'Koordinasi Pelaksanaan Pembangunan Kawasan Perdesaan di Wilayah Kecamatan'),
+(39, 5, '7.01.06.2.01.02', 'Fasilitasi Administrasi Tata Pemerintahan Desa'),
+(40, 5, '7.01.06.2.01.09', 'Fasilitasi Sinkronisasi Perencanaan Pembangunan Daerah dengan Pembangunan Desa');
 
 -- --------------------------------------------------------
 
@@ -3064,7 +3066,7 @@ CREATE TABLE `t_users` (
 
 INSERT INTO `t_users` (`id`, `name`, `username`, `email`, `nip`, `password`, `status`, `photo`, `level`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Super Admin', '', 'superadmin@gmail.com', '', '$2y$10$86Y4mfEl17qHIGPsxt1xM.RPAJpZwEgUeK5DgWb2WIbL6k5oSkM0S', 0, 'uploads/1627213245.jpg', 'admin', 'LdyJkofXVbhzm4oHXQJ46lYSO2ghMluCCyjRe2n0sl2IpoJup8KfTw0NKkLJ', '2020-10-17 14:07:57', '2021-07-24 21:40:45'),
-(2, 'Admin', 'admin', 'admin@gmail.com', '', '$2y$10$kmNexci2L5obDnNR.mQ6Uupu32xDFKzNKlMWQ9gGD4nEc3y2W5t1K', 0, 'uploads/1627213254.jpg', 'admin', 'NmjMgIh2tRHdZrhbknT4NC9r3uSi86nIhXyqTACcwcR2VHdflW7qtIHFi9uJ', '2020-10-17 14:15:12', '2021-08-23 03:22:50'),
+(2, 'Admin', 'admin', 'admin@gmail.com', '', '$2y$10$kmNexci2L5obDnNR.mQ6Uupu32xDFKzNKlMWQ9gGD4nEc3y2W5t1K', 0, 'uploads/1627213254.jpg', 'admin', 'XVbFDjsmOxVYpHSyIqxrNZUAuGWH8Sohh12s6ORBEb78uglYUScn6JHXlsyh', '2020-10-17 14:15:12', '2021-08-23 03:22:50'),
 (3, 'User', 'user', 'user@gmail.com', '', '$2y$10$G4kWtsHlBPPHG5r643Tsrern7cDXMyvHYxnXrHxzwYzcaYBfHy71W', 0, 'uploads/1627213260.jpg', 'user', 'eL1tN95NjYYt8R2MmujGM0VpxYQG00cUO315ZMDFDnpVtHgBCuqFpGjKdWO8', '2020-10-17 14:25:18', '2021-08-23 03:23:05'),
 (4, 'DADANG HERMAWAN S S.IP., MAP', 'dadang', '196408271991031006', '196408271991031006', '$2y$10$ToOVci63i4ehaWlRuftdvOoDl7K3yFk2Ax/afg9M886.v21qp.0Mm', 1, 'assets/images/users/user-image.png', 'admin', 'HgtkZYCeA5R8JY1fCns983MEzdeCN7m9iGghkKdsjkon66CBMnwmIt5M4ghK', '2021-07-25 16:41:24', '2021-07-25 17:10:07'),
 (5, 'ANDRI YUDHA PRAWIRA SIP.,Msi', 'andri', '198712202007011002', '198712202007011002', '$2y$10$LXETOlg1uVX3.NEdJTKvCeq5XwVloIAVeTWnqs.7TD76jZl1oBb9a', 1, 'assets/images/users/user-image.png', 'admin', NULL, '2021-07-25 16:46:45', '2021-07-25 17:10:25'),
@@ -3152,6 +3154,12 @@ ALTER TABLE `t_det_realisasi`
 ALTER TABLE `t_det_rincian`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_rincian` (`id_rincian`);
+
+--
+-- Indexes for table `t_jabatan`
+--
+ALTER TABLE `t_jabatan`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `t_keg`
@@ -3264,6 +3272,12 @@ ALTER TABLE `t_det_realisasi`
 --
 ALTER TABLE `t_det_rincian`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=302;
+
+--
+-- AUTO_INCREMENT for table `t_jabatan`
+--
+ALTER TABLE `t_jabatan`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `t_keg`
