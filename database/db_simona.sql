@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 03, 2021 at 11:36 AM
--- Server version: 10.4.17-MariaDB
+-- Generation Time: Sep 03, 2021 at 03:38 PM
+-- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -2455,10 +2455,10 @@ INSERT INTO `t_mapping_user_to_jabatan` (`id`, `id_user`, `id_jabatan`) VALUES
 (2, 5, 2),
 (3, 5, 5),
 (4, 6, 0),
-(5, 7, 7),
+(5, 7, 3),
 (6, 8, 4),
 (7, 8, 6),
-(8, 9, 3),
+(8, 9, 7),
 (9, 10, 0);
 
 -- --------------------------------------------------------
@@ -3066,14 +3066,14 @@ CREATE TABLE `t_users` (
 
 INSERT INTO `t_users` (`id`, `name`, `username`, `email`, `nip`, `password`, `status`, `photo`, `level`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Super Admin', '', 'superadmin@gmail.com', '', '$2y$10$86Y4mfEl17qHIGPsxt1xM.RPAJpZwEgUeK5DgWb2WIbL6k5oSkM0S', 0, 'uploads/1627213245.jpg', 'admin', 'LdyJkofXVbhzm4oHXQJ46lYSO2ghMluCCyjRe2n0sl2IpoJup8KfTw0NKkLJ', '2020-10-17 14:07:57', '2021-07-24 21:40:45'),
-(2, 'Admin', 'admin', 'admin@gmail.com', '', '$2y$10$kmNexci2L5obDnNR.mQ6Uupu32xDFKzNKlMWQ9gGD4nEc3y2W5t1K', 0, 'uploads/1627213254.jpg', 'admin', 'aZPBuWyqsTDSEE76PN2rPoDh9sPtNJA09K7yFnX6LVcVD39K9Zv0HS5AZ8CZ', '2020-10-17 14:15:12', '2021-08-23 03:22:50'),
+(2, 'Admin', 'admin', 'admin@gmail.com', '', '$2y$10$kmNexci2L5obDnNR.mQ6Uupu32xDFKzNKlMWQ9gGD4nEc3y2W5t1K', 0, 'uploads/1627213254.jpg', 'admin', 'ng7sqm1wySVlG4gr3ikGp3M5js07s9adO5X23C8MsK2qcuBGxubqDDuxWbLp', '2020-10-17 14:15:12', '2021-08-23 03:22:50'),
 (3, 'User', 'user', 'user@gmail.com', '', '$2y$10$G4kWtsHlBPPHG5r643Tsrern7cDXMyvHYxnXrHxzwYzcaYBfHy71W', 0, 'uploads/1627213260.jpg', 'user', 'eL1tN95NjYYt8R2MmujGM0VpxYQG00cUO315ZMDFDnpVtHgBCuqFpGjKdWO8', '2020-10-17 14:25:18', '2021-08-23 03:23:05'),
-(4, 'DADANG HERMAWAN S S.IP., MAP', 'dadang', '196408271991031006', '196408271991031006', '$2y$10$ToOVci63i4ehaWlRuftdvOoDl7K3yFk2Ax/afg9M886.v21qp.0Mm', 1, 'assets/images/users/user-image.png', 'user', 'HgtkZYCeA5R8JY1fCns983MEzdeCN7m9iGghkKdsjkon66CBMnwmIt5M4ghK', '2021-07-25 16:41:24', '2021-07-25 17:10:07'),
-(5, 'ANDRI YUDHA PRAWIRA SIP.,Msi', 'andri', '198712202007011002', '198712202007011002', '$2y$10$LXETOlg1uVX3.NEdJTKvCeq5XwVloIAVeTWnqs.7TD76jZl1oBb9a', 1, 'assets/images/users/user-image.png', 'user', NULL, '2021-07-25 16:46:45', '2021-07-25 17:10:25'),
-(6, 'Hj. SITI NOVIYANTI S.Sos', 'siti', '198304042010012001', '198304042010012001', '$2y$10$4GPYCjltfa2M5/Bhhyoxu.RpDQPalyIHy7fYIpcrY6iO02xNKGHtG', 1, 'assets/images/users/user-image.png', 'user', 'ugUz19lWqAViZhUfj8D4SWKcO1SqRxx3DrHhdOwYawlGj4ktYHisFrIwt1DH', '2021-07-25 16:47:41', '2021-08-19 11:11:43'),
-(7, 'Hj. NINA HERNINA S.Sos.,Msi', 'nina', '196702251992032005', '196702251992032005', '$2y$10$EIOV9KDHyOYEVxa8NHNtVerTNKS0c5w5fY5ZWJjQ4Rg0PBfXaLZOe', 1, 'assets/images/users/user-image.png', 'user', 'vKjHk0NgL4fkKPsYIFeFV6vtpHCq8pEQSjsSs2nGhLzLVfeBi2bW8WGLLBd6', '2021-07-25 16:48:53', '2021-08-19 11:12:11'),
-(8, 'MOHAMAD AMING SE', 'aming', '196405271986031011', '196405271986031011', '$2y$10$GMiQGxE39o04A1iEyHNJYOqLCE1f0baSNMKMKXJ7n8N2CNray4eHW', 1, 'assets/images/users/user-image.png', 'user', 'z30dCHTeA7PN2nWMLnX6Ptx2z0HQceYDFizW7kPDd5jp1r6UBh2edfHh8M8l', '2021-07-25 16:58:02', '2021-08-19 11:12:29'),
-(9, 'HERI HERAWAN S.Sos', 'heri', '197810102008011007', '197810102008011007', '$2y$10$gTUroAEqVuJhj9U0q72Uu.D.f72d2V1yNurlYMz2b.3aqHCtdxJ1u', 1, 'assets/images/users/user-image.png', 'user', NULL, '2021-07-25 17:00:12', '2021-08-19 11:13:08'),
+(4, 'DADANG HERMAWAN S S.IP., MAP', 'dadang', '196408271991031006', '196408271991031006', '$2y$10$ToOVci63i4ehaWlRuftdvOoDl7K3yFk2Ax/afg9M886.v21qp.0Mm', 1, 'assets/images/users/user-image.png', 'user', '9eyOztgkRtGvzAr9LbMtRa82id2plQDckkfeUdyB6s8i6cstJx0PP3TMWq0e', '2021-07-25 16:41:24', '2021-07-25 17:10:07'),
+(5, 'ANDRI YUDHA PRAWIRA SIP.,Msi', 'andri', '198712202007011002', '198712202007011002', '$2y$10$LXETOlg1uVX3.NEdJTKvCeq5XwVloIAVeTWnqs.7TD76jZl1oBb9a', 1, 'assets/images/users/user-image.png', 'user', 'lYUcFOHDO2I9mnFVA7Pj2IU2hw0iYiki2CkKyNLVLUM3GvGAZ4E6BPVIhF0V', '2021-07-25 16:46:45', '2021-07-25 17:10:25'),
+(6, 'Hj. SITI NOVIYANTI S.Sos', 'siti', '198304042010012001', '198304042010012001', '$2y$10$4GPYCjltfa2M5/Bhhyoxu.RpDQPalyIHy7fYIpcrY6iO02xNKGHtG', 1, 'assets/images/users/user-image.png', 'user', 'PvoM86X2QN5yxgiJ3KDsEs3dgQeUd3ZLvMFOKmlrfnHkKkTdoTOhLR3qBaoL', '2021-07-25 16:47:41', '2021-08-19 11:11:43'),
+(7, 'Hj. NINA HERNINA S.Sos.,Msi', 'nina', '196702251992032005', '196702251992032005', '$2y$10$EIOV9KDHyOYEVxa8NHNtVerTNKS0c5w5fY5ZWJjQ4Rg0PBfXaLZOe', 1, 'assets/images/users/user-image.png', 'user', 'oCbqfMEKsJtsQnPZjbzjG3s3KNTZWmelySn2VeMUMMxW3m2R2CKegXqeCWAR', '2021-07-25 16:48:53', '2021-08-19 11:12:11'),
+(8, 'MOHAMAD AMING SE', 'aming', '196405271986031011', '196405271986031011', '$2y$10$GMiQGxE39o04A1iEyHNJYOqLCE1f0baSNMKMKXJ7n8N2CNray4eHW', 1, 'assets/images/users/user-image.png', 'user', 'lE2h4odPxaO5TdzrklI8sqAuzolopHNm7gOhT1wOl9TE8A3qMaPUUweDKm8D', '2021-07-25 16:58:02', '2021-08-19 11:12:29'),
+(9, 'HERI HERAWAN S.Sos', 'heri', '197810102008011007', '197810102008011007', '$2y$10$gTUroAEqVuJhj9U0q72Uu.D.f72d2V1yNurlYMz2b.3aqHCtdxJ1u', 1, 'assets/images/users/user-image.png', 'user', 'e2wnyPxwEL3xSa61k7rZC1ApDLnWFtmtlLd0znuu1Sx60YCzx0GcFZrnxMX6', '2021-07-25 17:00:12', '2021-08-19 11:13:08'),
 (10, 'ISEF TAOFIQ S.Sos', 'isef', '197309012010011002', '197309012010011002', '$2y$10$Lku9szgyrEssmrEui3ZaKujWPZ9rfR/ItSAIZDWB2iCu3jpU1bi.q', 1, 'assets/images/users/user-image.png', 'admin', NULL, '2021-07-25 17:02:20', '2021-08-19 11:13:28');
 
 -- --------------------------------------------------------

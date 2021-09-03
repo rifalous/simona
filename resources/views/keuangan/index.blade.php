@@ -2,7 +2,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $('#table').DataTable({
-      "iDisplayLength": 10
+      "iDisplayLength": 12
     });
 
 } );
@@ -78,7 +78,6 @@
                             {{ $data['persenRealisasi'] }}
                           </td>
                           <td>
-                          @if(Auth::user()->level == 'admin')
                           <div class="btn-group dropdown">
                           <button type="button" class="btn btn-success dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Action
@@ -92,8 +91,6 @@
                             </form>  
                           </div>
                         </div>
-                        @else
-                        @endif
                           </td>
                         </tr>
                       @endforeach

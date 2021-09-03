@@ -13,6 +13,7 @@ use App\User;
 use App\AnggaranKas;
 use App\DetailRealisasi;
 use App\Jabatan;
+use App\MappingUserToJabatan;
 use Carbon\Carbon;
 use Session;
 use Auth;
@@ -35,18 +36,7 @@ class KeuanganController extends Controller
 
     public function index()
     {
-        // if(Auth::user()->level == 'user')
-        // {
-        //     $datas = Transaksi::where('anggota_id', Auth::user()->anggota->id)
-        //                         ->get();
-        //     $datas = Transaksi::get();
-        // } else {
-        //     $datas = Transaksi::get();
-        // }
-
-        $bulanini = date('m');
-        $total_anggaran = AnggaranKas::sum('anggaran');
-        $total_realisasi = DetailRealisasi::sum('realisasi');
+        $bulanini = date('m')-2;
 
         $anggaran = array();
         $realisasi = array();
@@ -61,14 +51,84 @@ class KeuanganController extends Controller
             $keuangan['no'] = $i;
             $keuangan['bulan'] = $month;
 
-            $query1 = AnggaranKas::where('bulan', '<=', $i)->sum('anggaran');
+            
+            if (Auth::user()->level == 'admin')
+            {
+                $total_anggaran = AnggaranKas::sum('anggaran');
+                $total_realisasi = DetailRealisasi::sum('realisasi');
+                $query1 = AnggaranKas::where('bulan', '<=', $i)->sum('anggaran');
+                $query2 = DetailRealisasi::where('bulan', '<=', $i)->sum('realisasi');
+            }
+            else {
+                $getUserJabatan = MappingUserToJabatan::where('id_user', '=', Auth::user()->id)->first();
+                $getUserJabatan = $getUserJabatan->id_jabatan;
+                $query1 = AnggaranKas::where('t_anggarankas.bulan', '<=', $i)
+                        ->where('t_mapping_jabatan_to_subkeg.id_jabatan', '=', $getUserJabatan)
+                        ->leftjoin('t_rincian', function($join) {
+                            $join->on('t_anggarankas.id_rincian', '=', 't_rincian.id');
+                        })
+                        ->leftjoin('t_subkeg', function($join) {
+                            $join->on('t_rincian.id_subkeg', '=', 't_subkeg.id');
+                        })
+                        ->leftjoin('t_mapping_jabatan_to_subkeg', function($join) {
+                            $join->on('t_subkeg.id', '=', 't_mapping_jabatan_to_subkeg.id_subkeg');
+                        })
+                        ->select(['t_anggarankas.*', 't_subkeg.kd_subkeg', 't_subkeg.nama_subkeg', 't_rincian.nama_rincian'])
+                        ->sum('anggaran');
+
+                $query2 = DetailRealisasi::where('t_det_realisasi.bulan', '<=', $i)
+                        ->where('t_mapping_jabatan_to_subkeg.id_jabatan', '=', $getUserJabatan)
+                        ->join('t_anggarankas', function($join) {
+                            $join->on('t_det_realisasi.id_anggaran', '=', 't_anggarankas.id');
+                        })
+                        ->leftjoin('t_rincian', function($join) {
+                            $join->on('t_anggarankas.id_rincian', '=', 't_rincian.id');
+                        })
+                        ->leftjoin('t_subkeg', function($join) {
+                            $join->on('t_rincian.id_subkeg', '=', 't_subkeg.id');
+                        })
+                        ->leftjoin('t_mapping_jabatan_to_subkeg', function($join) {
+                            $join->on('t_subkeg.id', '=', 't_mapping_jabatan_to_subkeg.id_subkeg');
+                        })
+                        ->select(['t_det_realisasi.*', 't_subkeg.kd_subkeg', 't_subkeg.nama_subkeg', 't_rincian.nama_rincian' ])
+                        ->sum('realisasi');
+                        
+                $total_anggaran = AnggaranKas::where('t_mapping_jabatan_to_subkeg.id_jabatan', '=', $getUserJabatan)
+                        ->leftjoin('t_rincian', function($join) {
+                            $join->on('t_anggarankas.id_rincian', '=', 't_rincian.id');
+                        })
+                        ->leftjoin('t_subkeg', function($join) {
+                            $join->on('t_rincian.id_subkeg', '=', 't_subkeg.id');
+                        })
+                        ->leftjoin('t_mapping_jabatan_to_subkeg', function($join) {
+                            $join->on('t_subkeg.id', '=', 't_mapping_jabatan_to_subkeg.id_subkeg');
+                        })
+                        ->select(['t_anggarankas.*', 't_subkeg.kd_subkeg', 't_subkeg.nama_subkeg', 't_rincian.nama_rincian'])
+                        ->sum('anggaran');
+
+                $total_realisasi = DetailRealisasi::where('t_mapping_jabatan_to_subkeg.id_jabatan', '=', $getUserJabatan)
+                        ->join('t_anggarankas', function($join) {
+                            $join->on('t_det_realisasi.id_anggaran', '=', 't_anggarankas.id');
+                        })
+                        ->leftjoin('t_rincian', function($join) {
+                            $join->on('t_anggarankas.id_rincian', '=', 't_rincian.id');
+                        })
+                        ->leftjoin('t_subkeg', function($join) {
+                            $join->on('t_rincian.id_subkeg', '=', 't_subkeg.id');
+                        })
+                        ->leftjoin('t_mapping_jabatan_to_subkeg', function($join) {
+                            $join->on('t_subkeg.id', '=', 't_mapping_jabatan_to_subkeg.id_subkeg');
+                        })
+                        ->select(['t_det_realisasi.*', 't_subkeg.kd_subkeg', 't_subkeg.nama_subkeg', 't_rincian.nama_rincian' ])
+                        ->sum('realisasi');
+            }
+
             $keuangan['anggaran'] = $query1;
 
             $query1 = ($query1 / $total_anggaran)*100;
             $query1 = number_format((float)$query1, 2, '.', '');
             $keuangan['persenAnggaran'] = $query1;
 
-            $query2 = DetailRealisasi::where('bulan', '<=', $i)->sum('realisasi');
             if ($i >= $bulanini) {
                 $keuangan['realisasi'] = 0;
             }
@@ -96,59 +156,7 @@ class KeuanganController extends Controller
     
     public function kegiatan()
     {
-        // $bulanini = date('m');
-        // $total_anggaran = AnggaranKas::sum('anggaran');
-        // $total_realisasi = DetailRealisasi::sum('realisasi');
 
-        // $anggaran = array();
-        // $realisasi = array();
-        // $persenAnggaran = array();
-        // $persenRealisasi = array();
-        // $months = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
-        
-        // $keuangan = array();
-        // $dataKeuangan = array();
-        // $i = 1;
-        // foreach ($months as $month) {
-        //     $keuangan['no'] = $i;
-        //     $keuangan['bulan'] = $month;
-
-        //     $query1 = AnggaranKas::where('bulan', '<=', $i)->sum('anggaran');
-        //     $keuangan['anggaran'] = $query1;
-
-        //     $query1 = ($query1 / $total_anggaran)*100;
-        //     $query1 = number_format((float)$query1, 2, '.', '');
-        //     $keuangan['persenAnggaran'] = $query1;
-
-        //     $query2 = DetailRealisasi::where('bulan', '<=', $i)->sum('realisasi');
-        //     if ($i >= $bulanini) {
-        //         $keuangan['realisasi'] = 0;
-        //     }
-        //     else {
-        //         $keuangan['realisasi'] = $query2;
-        //     }
-
-        //     $query2 = ($query2 / $total_anggaran)*100;
-        //     $query2 = number_format((float)$query2, 2, '.', '');
-        //     if ($i >= $bulanini) {
-        //         $keuangan['persenRealisasi'] = 0;
-        //     }
-        //     else {
-        //         $keuangan['persenRealisasi'] = $query2;
-        //     }
-        //     array_push($dataKeuangan, $keuangan);
-        //     $i++;
-        // }
-
-        // return response()->json($dataKeuangan, 200);
-        // return view('keuangan.kegiatan', compact('dataKeuangan'));
-        // return response()->json(['months', 'anggaran', 'realisasi', 'persenAnggaran', 'persenRealisasi']);
-        // return response()->json([$anggaran, $realisasi], 200);
-
-    
-        // return view('keuangan.kegiatan');
-    
-        return "ANJING";
     }
 
     /**
@@ -158,15 +166,6 @@ class KeuanganController extends Controller
      */
     public function create()
     {
-        
-        // $getRow = Transaksi::orderBy('id', 'DESC')->get();
-        // $rowCount = $getRow->count();
-        
-        // $lastId = $getRow->first();
-
-        // $bukus = Buku::where('jumlah_buku', '>', 0)->get();
-        // $anggotas = Anggota::get();
-        // return view('transaksi.create', compact('bukus', 'kode', 'anggotas'));
         return view('keuangan.create');
     }
 
@@ -178,33 +177,7 @@ class KeuanganController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     'kode_transaksi' => 'required|string|max:255',
-        //     'tgl_pinjam' => 'required',
-        //     'tgl_kembali' => 'required',
-        //     'buku_id' => 'required',
-        //     'anggota_id' => 'required',
-
-        // ]);
-
-        // $transaksi = Transaksi::create([
-        //         'kode_transaksi' => $request->get('kode_transaksi'),
-        //         'tgl_pinjam' => $request->get('tgl_pinjam'),
-        //         'tgl_kembali' => $request->get('tgl_kembali'),
-        //         'buku_id' => $request->get('buku_id'),
-        //         'anggota_id' => $request->get('anggota_id'),
-        //         'ket' => $request->get('ket'),
-        //         'status' => 'pinjam'
-        //     ]);
-
-        // $transaksi->buku->where('id', $transaksi->buku_id)
-        //                 ->update([
-        //                     'jumlah_buku' => ($transaksi->buku->jumlah_buku - 1),
-        //                     ]);
-
-        // alert()->success('Berhasil.','Data telah ditambahkan!');
-        // return redirect()->route('transaksi.index');
-
+        //
     }
 
     /**
@@ -215,17 +188,7 @@ class KeuanganController extends Controller
      */
     public function show($id)
     {
-
-        // $data = Transaksi::findOrFail($id);
-
-
-        // if((Auth::user()->level == 'user') && (Auth::user()->anggota->id != $data->anggota_id)) {
-        //         Alert::info('Oopss..', 'Anda dilarang masuk ke area ini.');
-        //         return redirect()->to('/');
-        // }
-
-
-        // return view('transaksi.show', compact('data'));
+        //
     }
 
     /**
@@ -236,14 +199,6 @@ class KeuanganController extends Controller
      */
     public function edit($id)
     {   
-        // $data = Transaksi::findOrFail($id);
-
-        // if((Auth::user()->level == 'user') && (Auth::user()->anggota->id != $data->anggota_id)) {
-        //         Alert::info('Oopss..', 'Anda dilarang masuk ke area ini.');
-        //         return redirect()->to('/');
-        // }
-
-        // return view('buku.edit', compact('data'));
         return view('keuangan.edit');
     }
 
@@ -256,19 +211,7 @@ class KeuanganController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $transaksi = Transaksi::find($id);
-
-        // $transaksi->update([
-        //         'status' => 'kembali'
-        //         ]);
-
-        // $transaksi->buku->where('id', $transaksi->buku->id)
-        //                 ->update([
-        //                     'jumlah_buku' => ($transaksi->buku->jumlah_buku + 1),
-        //                     ]);
-
-        // alert()->success('Berhasil.','Data telah diubah!');
-        // return redirect()->route('transaksi.index');
+        //
     }
 
     /**
@@ -279,8 +222,8 @@ class KeuanganController extends Controller
      */
     public function destroy($id)
     {
-        Keuangan::find($id)->delete();
-        alert()->success('Berhasil.','Data telah dihapus!');
-        return redirect()->route('keuangan.index');
+        // Keuangan::find($id)->delete();
+        // alert()->success('Berhasil.','Data telah dihapus!');
+        // return redirect()->route('keuangan.index');
     }
 }

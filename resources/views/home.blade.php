@@ -65,6 +65,7 @@
               </div>
             </div>
 </div>
+@if(Auth::user()->level == 'admin')
 <div class="row">
     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
             <div class="card card-statistics">
@@ -147,6 +148,7 @@
               </div>
             </div>
 </div>
+@endif
 
 <div class="row" >
   <div class="col-lg-6 grid-margin stretch-card">
@@ -332,19 +334,29 @@
               </tr>
               </thead>
               <tbody>
+              @php 
+                $i=0;
+                $no=1;
+              @endphp
               @foreach($pptks as $pptk)
               <tr>
                 <td class="py-1">
-                  {{$pptk->id}}
+                  {{$no}}
                 </td>
                 <td class="py-1">
                   {{$pptk->jabatan}}
                 </td>
                 <td class="py-1">
+                  {{"Rp. ".number_format($pptkAnggaran[$i])}} 
                 </td>
                 <td class="py-1">
+                  {{"Rp. ".number_format($pptkRealisasi[$i])}} 
                 </td>
               </tr>
+              @php 
+                $i++;
+                $no++; 
+              @endphp
               @endforeach
               </tbody>
             </table>
