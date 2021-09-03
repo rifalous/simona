@@ -85,8 +85,8 @@
             <th rowspan="2">KODE REKENING</th>
             <!-- <th>Urusan/Bidang/Program/Kegiatan/Sub Kegiatan</th> -->
             <th rowspan="2">URAIAN (Program/Kegiatan/Sub Kegiatan/Rincian Belanja)</th>
-            <th colspan="4">REALISASI</th>
             <th colspan="4">ANGGARAN</th>
+            <th colspan="4">REALISASI</th>
             <th rowspan="2">SISA ANGGARAN</th>
         </tr>
         <tr>
@@ -101,8 +101,87 @@
         </tr>
 	</thead>
 	<tbody>
+    	@foreach($dataAnggaran as $data)
+			<tr>
+				<td style="text-indent: 5px;"><b><i>{{ $data->kd_prog }}</i></b></td>
+				<td style="text-indent: 5px;"><b><i>{{ $data->prog }}</i></b</td>
+				<td></td> 
+				<td></td> 
+				<td></td> 
+				<td></td> 
+				<td></td> 
+				<td></td> 
+				<td></td> 
+				<td></td> 
+				<td></td> 
+			</tr>
+			<tr>
+				<td style="text-indent: 10px;"><i>{{ $data->kd_keg }}</i></td>
+				<td style="text-indent: 10px;"><i>{{ $data->keg }}</i></td>
+				<td></td> 
+				<td></td> 
+				<td></td> 
+				<td></td> 
+				<td></td> 
+				<td></td> 
+				<td></td> 
+				<td></td> 
+				<td></td> 
+			</tr>
+			<tr>
+				<td style="text-indent: 15px;">{{ $data->kd_subkeg }}</td>
+				<td style="text-indent: 15px;">{{ $data->subkeg }}</td>
+				<td></td> 
+				<td></td> 
+				<td></td> 
+				<td></td> 
+				<td></td> 
+				<td></td> 
+				<td></td> 
+				<td></td> 
+				<td></td> 
+			</tr>
+            <tr>
+              	<td style="text-indent: 15px;">
+                	{{ $data->kd_rincian }}
+            	</td>
+              	<td style="text-indent: 15px;">
+				  	{{ $data->rincian }} 
+            	</td>
+                <td>
+                	{{ $data->vol_anggaran }}
+            	</td>
+                <td>
+                	{{ $data->satuan_anggaran }}
+            	</td>
+                <td>
+					{{"Rp. ".number_format($data->harga_anggaran)}}
+            	</td>
+                <td>
+					{{"Rp. ".number_format($data->total_anggaran)}}
+            	</td>
+                <td>
+                	{{ $data->vol_realisasi }}
+            	</td>
+                <td>
+                	{{ $data->satuan_realisasi }}
+            	</td>
+                <td>
+					{{"Rp. ".number_format($data->harga_realisasi)}}
+            	</td>
+                <td>
+					{{"Rp. ".number_format($data->total_realisasi)}}
+            	</td>
+                <td>
+                	{{ "Rp. ".number_format($data->total_anggaran - $data->total_realisasi) }}
+            	</td>
+            </tr>
+        @endforeach
 	</tbody>
 </table>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

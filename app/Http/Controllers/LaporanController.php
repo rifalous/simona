@@ -38,9 +38,41 @@ class LaporanController extends Controller
 
     public function realisasiAnggaranPdf(Request $request)
     {
-        return view('laporan.realisasi_anggaran_global', compact('datas'));
-        //    $pdf = PDF::loadView('laporan.transaksi_pdf', compact('datas'));
-        //    return $pdf->download('laporan_transaksi_'.date('Y-m-d_H-i-s').'.pdf');
+        $dataAnggaran = DB::select("select 
+                    `t_master_det_rincian`.`id` as `id_master`, 
+                    `t_master_det_rincian`.`vol` as `vol_anggaran`, 
+                    `t_master_det_rincian`.`satuan` as `satuan_anggaran`, 
+                    `t_master_det_rincian`.`harga` as `harga_anggaran`, 
+                    `t_master_det_rincian`.`total` as `total_anggaran`, 
+                    `t_det_realisasi`.`bulan`, 
+                    `t_det_realisasi`.`tahun`, 
+                    `t_det_realisasi`.`vol` as `vol_realisasi`, 
+                    `t_det_realisasi`.`satuan` as `satuan_realisasi`, 
+                    `t_det_realisasi`.`harga` as `harga_realisasi`, 
+                    `t_det_realisasi`.`realisasi` as `total_realisasi`, 
+                    `t_det_rincian`.`nama_det_rincian` as `det_rincian`, 
+                    `t_rincian`.`kd_rincian`, 
+                    `t_rincian`.`nama_rincian` as `rincian`, 
+                    `t_subkeg`.`kd_subkeg`, 
+                    `t_subkeg`.`nama_subkeg` as `subkeg`, 
+                    `t_keg`.`kd_keg`, 
+                    `t_keg`.`nama_keg` as `keg`, 
+                    `t_prog`.`kd_prog`, 
+                    `t_prog`.`nama_prog` as `prog` 
+                from 
+                    `t_master_det_rincian` 
+                    left join `t_det_realisasi` on `t_master_det_rincian`.`id` = `t_det_realisasi`.`id_master_det_rincian` 
+                    inner join `t_det_rincian` on `t_master_det_rincian`.`id_det_rincian` = `t_det_rincian`.`id` 
+                    inner join `t_rincian` on `t_det_rincian`.`id_rincian` = `t_rincian`.`id` 
+                    inner join `t_subkeg` on `t_rincian`.`id_subkeg` = `t_subkeg`.`id` 
+                    inner join `t_keg` on `t_subkeg`.`id_keg` = `t_keg`.`id` 
+                    inner join `t_prog` on `t_keg`.`id_prog` = `t_prog`.`id` 
+                group by 
+                    `id_master`");
+
+        return view('laporan.realisasi_anggaran_global', compact('dataAnggaran'));
+        // $pdf = PDF::loadView('laporan.realisasi_anggaran_global', compact('dataAnggaran'));
+        // return $pdf->download('laporan_transaksi_'.date('Y-m-d_H-i-s').'.pdf');
     }
 
 
@@ -50,9 +82,13 @@ class LaporanController extends Controller
         Excel::create($nama, function ($excel) use ($request) {
         $excel->sheet('Laporan Data Transaksi', function ($sheet) use ($request) {
         
-        $sheet->mergeCells('A1:H1');
+        $sheet->mergeCells('A1:K1');
+        // $sheet->mergeCells('A2:A3');
+        // $sheet->mergeCells('B2:B3');
+        // $sheet->mergeCells('C2:F2');
+        // $sheet->mergeCells('G2:J2');
 
-       // $sheet->setAllBorders('thin');
+    //    $sheet->setAllBorders('thin');
         $sheet->row(1, function ($row) {
             $row->setFontFamily('Calibri');
             $row->setFontSize(11);
@@ -60,52 +96,72 @@ class LaporanController extends Controller
             $row->setFontWeight('bold');
         });
 
-        $sheet->row(1, array('LAPORAN DATA TRANSAKSI'));
-
+        $sheet->row(1, array('LAPORAN DATA REALISASI'));
+        // $sheet->row(2, array("KODE REKENING", "URAIAN (Program/Kegiatan/Sub Kegiatan/Rincian Belanja)", "ANGGARAN", "REALISASI", "SISA ANGGARAN"));
+        // $sheet->row(3, array("Volume Anggaran", "Satuan Anggaran", "Harga Anggaran", "Total Anggaran", "Volume Realisasi", "Satuan Realisasi", "Harga Realisasi", "Total Realisasi"));
         $sheet->row(2, function ($row) {
             $row->setFontFamily('Calibri');
             $row->setFontSize(11);
             $row->setFontWeight('bold');
         });
 
-        $q = Transaksi::query();
+        $datas = DB::select("select 
+                    `t_master_det_rincian`.`id` as `id_master`, 
+                    `t_master_det_rincian`.`vol` as `vol_anggaran`, 
+                    `t_master_det_rincian`.`satuan` as `satuan_anggaran`, 
+                    `t_master_det_rincian`.`harga` as `harga_anggaran`, 
+                    `t_master_det_rincian`.`total` as `total_anggaran`, 
+                    `t_det_realisasi`.`bulan`, 
+                    `t_det_realisasi`.`tahun`, 
+                    `t_det_realisasi`.`vol` as `vol_realisasi`, 
+                    `t_det_realisasi`.`satuan` as `satuan_realisasi`, 
+                    `t_det_realisasi`.`harga` as `harga_realisasi`, 
+                    `t_det_realisasi`.`realisasi` as `total_realisasi`, 
+                    `t_det_rincian`.`nama_det_rincian` as `det_rincian`, 
+                    `t_rincian`.`kd_rincian`, 
+                    `t_rincian`.`nama_rincian` as `rincian`, 
+                    `t_subkeg`.`kd_subkeg`, 
+                    `t_subkeg`.`nama_subkeg` as `subkeg`, 
+                    `t_keg`.`kd_keg`, 
+                    `t_keg`.`nama_keg` as `keg`, 
+                    `t_prog`.`kd_prog`, 
+                    `t_prog`.`nama_prog` as `prog` 
+                from 
+                    `t_master_det_rincian` 
+                    left join `t_det_realisasi` on `t_master_det_rincian`.`id` = `t_det_realisasi`.`id_master_det_rincian` 
+                    inner join `t_det_rincian` on `t_master_det_rincian`.`id_det_rincian` = `t_det_rincian`.`id` 
+                    inner join `t_rincian` on `t_det_rincian`.`id_rincian` = `t_rincian`.`id` 
+                    inner join `t_subkeg` on `t_rincian`.`id_subkeg` = `t_subkeg`.`id` 
+                    inner join `t_keg` on `t_subkeg`.`id_keg` = `t_keg`.`id` 
+                    inner join `t_prog` on `t_keg`.`id_prog` = `t_prog`.`id` 
+                group by 
+                    `id_master`");
 
-        if($request->get('status')) 
-        {
-             if($request->get('status') == 'pinjam') {
-                $q->where('status', 'pinjam');
-            } else {
-                $q->where('status', 'kembali');
-            }
-        }
-
-        if(Auth::user()->level == 'user')
-        {
-            $q->where('anggota_id', Auth::user()->anggota->id);
-        }
-
-        $datas = $q->get();
-
-       // $sheet->appendRow(array_keys($datas[0]));
+        // $sheet->appendRow(array_keys($datas[0]));
         $sheet->row($sheet->getHighestRow(), function ($row) {
             $row->setFontWeight('bold');
         });
 
          $datasheet = array();
-         $datasheet[0]  =   array("NO", "KODE TRANSAKSI", "BUKU", "PEMINJAM",  "TGL PINJAM","TGL KEMBALI","STATUS", "KET");
+        //  $datasheet[0] =  array("KODE REKENING", "URAIAN (Program/Kegiatan/Sub Kegiatan/Rincian Belanja)", "ANGGARAN", "REALISASI", "SISA ANGGARAN")
+         $datasheet[0] =  array("KODE REKENING", "URAIAN (Program/Kegiatan/Sub Kegiatan/Rincian Belanja)","Volume Anggaran", "Satuan Anggaran", "Harga Anggaran", "Total Anggaran", "Volume Realisasi", "Satuan Realisasi", "Harga Realisasi", "Total Realisasi", "Sisa Anggaran");
          $i=1;
 
         foreach ($datas as $data) {
 
            // $sheet->appendrow($data);
-          $datasheet[$i] = array($i,
-                        $data['kode_transaksi'],
-                        $data->buku->judul,
-                        $data->anggota->nama,
-                        date('d/m/y', strtotime($data['tgl_pinjam'])),
-                        date('d/m/y', strtotime($data['tgl_kembali'])),
-                        $data['status'],
-                        $data['ket']
+          $datasheet[$i] = array(
+                        $data->kd_rincian,
+                        $data->rincian,
+                        $data->vol_anggaran,
+                        $data->satuan_anggaran,
+                        $data->harga_anggaran,
+                        $data->total_anggaran,
+                        $data->vol_realisasi,
+                        $data->satuan_realisasi,
+                        $data->harga_realisasi,
+                        $data->total_realisasi,
+                        $data->total_anggaran-$data->total_realisasi
                     );
           
           $i++;
