@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 27, 2021 at 05:04 PM
+-- Generation Time: Sep 03, 2021 at 11:36 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.2.34
 
@@ -2379,6 +2379,64 @@ INSERT INTO `t_keg` (`id`, `id_prog`, `kd_keg`, `nama_keg`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `t_mapping_jabatan_to_subkeg`
+--
+
+CREATE TABLE `t_mapping_jabatan_to_subkeg` (
+  `id` int(10) NOT NULL,
+  `id_jabatan` int(10) NOT NULL,
+  `id_subkeg` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t_mapping_jabatan_to_subkeg`
+--
+
+INSERT INTO `t_mapping_jabatan_to_subkeg` (`id`, `id_jabatan`, `id_subkeg`) VALUES
+(41, 2, 1),
+(42, 2, 2),
+(43, 2, 3),
+(44, 2, 4),
+(45, 2, 5),
+(46, 2, 6),
+(47, 2, 7),
+(48, 2, 8),
+(49, 2, 9),
+(50, 2, 10),
+(51, 2, 11),
+(52, 2, 12),
+(53, 2, 13),
+(54, 2, 14),
+(55, 2, 15),
+(56, 2, 16),
+(57, 2, 17),
+(58, 2, 18),
+(59, 2, 19),
+(60, 2, 20),
+(61, 2, 21),
+(62, 2, 22),
+(63, 2, 23),
+(64, 2, 24),
+(65, 2, 25),
+(66, 2, 26),
+(67, 2, 27),
+(73, 3, 33),
+(74, 3, 34),
+(75, 3, 35),
+(76, 3, 36),
+(78, 4, 38),
+(80, 4, 40),
+(72, 5, 32),
+(77, 5, 37),
+(71, 6, 31),
+(68, 7, 28),
+(69, 7, 29),
+(70, 7, 30),
+(79, 7, 39);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `t_mapping_user_to_jabatan`
 --
 
@@ -2402,64 +2460,6 @@ INSERT INTO `t_mapping_user_to_jabatan` (`id`, `id_user`, `id_jabatan`) VALUES
 (7, 8, 6),
 (8, 9, 3),
 (9, 10, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `t_mapping_user_to_subkeg`
---
-
-CREATE TABLE `t_mapping_user_to_subkeg` (
-  `id` int(10) NOT NULL,
-  `id_user` int(10) NOT NULL,
-  `id_subkeg` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `t_mapping_user_to_subkeg`
---
-
-INSERT INTO `t_mapping_user_to_subkeg` (`id`, `id_user`, `id_subkeg`) VALUES
-(1, 5, 1),
-(2, 5, 2),
-(3, 5, 3),
-(4, 5, 4),
-(5, 5, 5),
-(6, 5, 6),
-(7, 5, 7),
-(8, 5, 8),
-(9, 5, 9),
-(10, 5, 10),
-(11, 5, 11),
-(12, 5, 12),
-(13, 5, 13),
-(14, 5, 14),
-(15, 5, 15),
-(16, 5, 16),
-(17, 5, 17),
-(18, 5, 18),
-(19, 5, 19),
-(20, 5, 20),
-(21, 5, 21),
-(22, 5, 22),
-(23, 5, 23),
-(24, 5, 24),
-(25, 5, 25),
-(26, 5, 26),
-(27, 5, 27),
-(31, 5, 31),
-(33, 7, 33),
-(34, 7, 34),
-(35, 7, 35),
-(36, 7, 36),
-(32, 8, 32),
-(37, 8, 37),
-(38, 8, 38),
-(40, 8, 40),
-(28, 9, 28),
-(29, 9, 29),
-(30, 9, 30),
-(39, 9, 39);
 
 -- --------------------------------------------------------
 
@@ -3066,14 +3066,14 @@ CREATE TABLE `t_users` (
 
 INSERT INTO `t_users` (`id`, `name`, `username`, `email`, `nip`, `password`, `status`, `photo`, `level`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Super Admin', '', 'superadmin@gmail.com', '', '$2y$10$86Y4mfEl17qHIGPsxt1xM.RPAJpZwEgUeK5DgWb2WIbL6k5oSkM0S', 0, 'uploads/1627213245.jpg', 'admin', 'LdyJkofXVbhzm4oHXQJ46lYSO2ghMluCCyjRe2n0sl2IpoJup8KfTw0NKkLJ', '2020-10-17 14:07:57', '2021-07-24 21:40:45'),
-(2, 'Admin', 'admin', 'admin@gmail.com', '', '$2y$10$kmNexci2L5obDnNR.mQ6Uupu32xDFKzNKlMWQ9gGD4nEc3y2W5t1K', 0, 'uploads/1627213254.jpg', 'admin', 'XVbFDjsmOxVYpHSyIqxrNZUAuGWH8Sohh12s6ORBEb78uglYUScn6JHXlsyh', '2020-10-17 14:15:12', '2021-08-23 03:22:50'),
+(2, 'Admin', 'admin', 'admin@gmail.com', '', '$2y$10$kmNexci2L5obDnNR.mQ6Uupu32xDFKzNKlMWQ9gGD4nEc3y2W5t1K', 0, 'uploads/1627213254.jpg', 'admin', 'aZPBuWyqsTDSEE76PN2rPoDh9sPtNJA09K7yFnX6LVcVD39K9Zv0HS5AZ8CZ', '2020-10-17 14:15:12', '2021-08-23 03:22:50'),
 (3, 'User', 'user', 'user@gmail.com', '', '$2y$10$G4kWtsHlBPPHG5r643Tsrern7cDXMyvHYxnXrHxzwYzcaYBfHy71W', 0, 'uploads/1627213260.jpg', 'user', 'eL1tN95NjYYt8R2MmujGM0VpxYQG00cUO315ZMDFDnpVtHgBCuqFpGjKdWO8', '2020-10-17 14:25:18', '2021-08-23 03:23:05'),
-(4, 'DADANG HERMAWAN S S.IP., MAP', 'dadang', '196408271991031006', '196408271991031006', '$2y$10$ToOVci63i4ehaWlRuftdvOoDl7K3yFk2Ax/afg9M886.v21qp.0Mm', 1, 'assets/images/users/user-image.png', 'admin', 'HgtkZYCeA5R8JY1fCns983MEzdeCN7m9iGghkKdsjkon66CBMnwmIt5M4ghK', '2021-07-25 16:41:24', '2021-07-25 17:10:07'),
-(5, 'ANDRI YUDHA PRAWIRA SIP.,Msi', 'andri', '198712202007011002', '198712202007011002', '$2y$10$LXETOlg1uVX3.NEdJTKvCeq5XwVloIAVeTWnqs.7TD76jZl1oBb9a', 1, 'assets/images/users/user-image.png', 'admin', NULL, '2021-07-25 16:46:45', '2021-07-25 17:10:25'),
-(6, 'Hj. SITI NOVIYANTI S.Sos', 'siti', '198304042010012001', '198304042010012001', '$2y$10$4GPYCjltfa2M5/Bhhyoxu.RpDQPalyIHy7fYIpcrY6iO02xNKGHtG', 1, 'assets/images/users/user-image.png', 'admin', 'ugUz19lWqAViZhUfj8D4SWKcO1SqRxx3DrHhdOwYawlGj4ktYHisFrIwt1DH', '2021-07-25 16:47:41', '2021-08-19 11:11:43'),
-(7, 'Hj. NINA HERNINA S.Sos.,Msi', 'nina', '196702251992032005', '196702251992032005', '$2y$10$EIOV9KDHyOYEVxa8NHNtVerTNKS0c5w5fY5ZWJjQ4Rg0PBfXaLZOe', 1, 'assets/images/users/user-image.png', 'admin', 'vKjHk0NgL4fkKPsYIFeFV6vtpHCq8pEQSjsSs2nGhLzLVfeBi2bW8WGLLBd6', '2021-07-25 16:48:53', '2021-08-19 11:12:11'),
-(8, 'MOHAMAD AMING SE', 'aming', '196405271986031011', '196405271986031011', '$2y$10$GMiQGxE39o04A1iEyHNJYOqLCE1f0baSNMKMKXJ7n8N2CNray4eHW', 1, 'assets/images/users/user-image.png', 'admin', 'z30dCHTeA7PN2nWMLnX6Ptx2z0HQceYDFizW7kPDd5jp1r6UBh2edfHh8M8l', '2021-07-25 16:58:02', '2021-08-19 11:12:29'),
-(9, 'HERI HERAWAN S.Sos', 'heri', '197810102008011007', '197810102008011007', '$2y$10$gTUroAEqVuJhj9U0q72Uu.D.f72d2V1yNurlYMz2b.3aqHCtdxJ1u', 1, 'assets/images/users/user-image.png', 'admin', NULL, '2021-07-25 17:00:12', '2021-08-19 11:13:08'),
+(4, 'DADANG HERMAWAN S S.IP., MAP', 'dadang', '196408271991031006', '196408271991031006', '$2y$10$ToOVci63i4ehaWlRuftdvOoDl7K3yFk2Ax/afg9M886.v21qp.0Mm', 1, 'assets/images/users/user-image.png', 'user', 'HgtkZYCeA5R8JY1fCns983MEzdeCN7m9iGghkKdsjkon66CBMnwmIt5M4ghK', '2021-07-25 16:41:24', '2021-07-25 17:10:07'),
+(5, 'ANDRI YUDHA PRAWIRA SIP.,Msi', 'andri', '198712202007011002', '198712202007011002', '$2y$10$LXETOlg1uVX3.NEdJTKvCeq5XwVloIAVeTWnqs.7TD76jZl1oBb9a', 1, 'assets/images/users/user-image.png', 'user', NULL, '2021-07-25 16:46:45', '2021-07-25 17:10:25'),
+(6, 'Hj. SITI NOVIYANTI S.Sos', 'siti', '198304042010012001', '198304042010012001', '$2y$10$4GPYCjltfa2M5/Bhhyoxu.RpDQPalyIHy7fYIpcrY6iO02xNKGHtG', 1, 'assets/images/users/user-image.png', 'user', 'ugUz19lWqAViZhUfj8D4SWKcO1SqRxx3DrHhdOwYawlGj4ktYHisFrIwt1DH', '2021-07-25 16:47:41', '2021-08-19 11:11:43'),
+(7, 'Hj. NINA HERNINA S.Sos.,Msi', 'nina', '196702251992032005', '196702251992032005', '$2y$10$EIOV9KDHyOYEVxa8NHNtVerTNKS0c5w5fY5ZWJjQ4Rg0PBfXaLZOe', 1, 'assets/images/users/user-image.png', 'user', 'vKjHk0NgL4fkKPsYIFeFV6vtpHCq8pEQSjsSs2nGhLzLVfeBi2bW8WGLLBd6', '2021-07-25 16:48:53', '2021-08-19 11:12:11'),
+(8, 'MOHAMAD AMING SE', 'aming', '196405271986031011', '196405271986031011', '$2y$10$GMiQGxE39o04A1iEyHNJYOqLCE1f0baSNMKMKXJ7n8N2CNray4eHW', 1, 'assets/images/users/user-image.png', 'user', 'z30dCHTeA7PN2nWMLnX6Ptx2z0HQceYDFizW7kPDd5jp1r6UBh2edfHh8M8l', '2021-07-25 16:58:02', '2021-08-19 11:12:29'),
+(9, 'HERI HERAWAN S.Sos', 'heri', '197810102008011007', '197810102008011007', '$2y$10$gTUroAEqVuJhj9U0q72Uu.D.f72d2V1yNurlYMz2b.3aqHCtdxJ1u', 1, 'assets/images/users/user-image.png', 'user', NULL, '2021-07-25 17:00:12', '2021-08-19 11:13:08'),
 (10, 'ISEF TAOFIQ S.Sos', 'isef', '197309012010011002', '197309012010011002', '$2y$10$Lku9szgyrEssmrEui3ZaKujWPZ9rfR/ItSAIZDWB2iCu3jpU1bi.q', 1, 'assets/images/users/user-image.png', 'admin', NULL, '2021-07-25 17:02:20', '2021-08-19 11:13:28');
 
 -- --------------------------------------------------------
@@ -3169,18 +3169,18 @@ ALTER TABLE `t_keg`
   ADD KEY `kd_prog` (`id_prog`);
 
 --
+-- Indexes for table `t_mapping_jabatan_to_subkeg`
+--
+ALTER TABLE `t_mapping_jabatan_to_subkeg`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`id_jabatan`,`id_subkeg`);
+
+--
 -- Indexes for table `t_mapping_user_to_jabatan`
 --
 ALTER TABLE `t_mapping_user_to_jabatan`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_user` (`id_user`,`id_jabatan`);
-
---
--- Indexes for table `t_mapping_user_to_subkeg`
---
-ALTER TABLE `t_mapping_user_to_subkeg`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_user` (`id_user`,`id_subkeg`);
 
 --
 -- Indexes for table `t_master_det_rincian`
@@ -3286,16 +3286,16 @@ ALTER TABLE `t_keg`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `t_mapping_jabatan_to_subkeg`
+--
+ALTER TABLE `t_mapping_jabatan_to_subkeg`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+
+--
 -- AUTO_INCREMENT for table `t_mapping_user_to_jabatan`
 --
 ALTER TABLE `t_mapping_user_to_jabatan`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `t_mapping_user_to_subkeg`
---
-ALTER TABLE `t_mapping_user_to_subkeg`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `t_master_det_rincian`
