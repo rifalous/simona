@@ -7,6 +7,7 @@ use App\User;
 use App\Buku;
 use App\Anggota;
 use App\Transaksi;
+use App\MappingUserToJabatan;
 use Carbon\Carbon;
 use Session;
 use Illuminate\Support\Facades\Redirect;
@@ -38,6 +39,21 @@ class LaporanController extends Controller
 
     public function realisasiAnggaranPdf(Request $request)
     {
+        if (Auth::user()->level == 'admin') {
+            $getUserInfo = '';
+        }
+        else {
+            $getUserInfo = User::where('t_users.id', '=', Auth::user()->id)
+            ->select('t_users.*', 't_mapping_user_to_jabatan.*','t_jabatan.jabatan')
+            ->join('t_mapping_user_to_jabatan', function($join) {
+                $join->on('t_users.id', '=', 't_mapping_user_to_jabatan.id_user');
+            })
+            ->leftjoin('t_jabatan', function($join) {
+                $join->on('t_mapping_user_to_jabatan.id_jabatan', '=', 't_jabatan.id');
+            })
+            ->first();
+        }
+
         $dataAnggaran = DB::select("select 
                     `t_master_det_rincian`.`id` as `id_master`, 
                     `t_master_det_rincian`.`vol` as `vol_anggaran`, 
@@ -68,9 +84,10 @@ class LaporanController extends Controller
                     inner join `t_keg` on `t_subkeg`.`id_keg` = `t_keg`.`id` 
                     inner join `t_prog` on `t_keg`.`id_prog` = `t_prog`.`id` 
                 group by 
-                    `id_master`");
+                    `id_master`
+                order by `kd_subkeg` ASC");
 
-        return view('laporan.realisasi_anggaran_global', compact('dataAnggaran'));
+        return view('laporan.realisasi_anggaran_global', compact(['dataAnggaran', 'getUserInfo']));
         // $pdf = PDF::loadView('laporan.realisasi_anggaran_global', compact('dataAnggaran'));
         // return $pdf->download('laporan_transaksi_'.date('Y-m-d_H-i-s').'.pdf');
     }

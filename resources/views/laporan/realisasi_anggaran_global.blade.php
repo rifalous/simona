@@ -101,81 +101,121 @@
         </tr>
 	</thead>
 	<tbody>
+        @php ($kode = '')
     	@foreach($dataAnggaran as $data)
-			<tr>
-				<td style="text-indent: 5px;"><b><i>{{ $data->kd_prog }}</i></b></td>
-				<td style="text-indent: 5px;"><b><i>{{ $data->prog }}</i></b</td>
-				<td></td> 
-				<td></td> 
-				<td></td> 
-				<td></td> 
-				<td></td> 
-				<td></td> 
-				<td></td> 
-				<td></td> 
-				<td></td> 
-			</tr>
-			<tr>
-				<td style="text-indent: 10px;"><i>{{ $data->kd_keg }}</i></td>
-				<td style="text-indent: 10px;"><i>{{ $data->keg }}</i></td>
-				<td></td> 
-				<td></td> 
-				<td></td> 
-				<td></td> 
-				<td></td> 
-				<td></td> 
-				<td></td> 
-				<td></td> 
-				<td></td> 
-			</tr>
-			<tr>
-				<td style="text-indent: 15px;">{{ $data->kd_subkeg }}</td>
-				<td style="text-indent: 15px;">{{ $data->subkeg }}</td>
-				<td></td> 
-				<td></td> 
-				<td></td> 
-				<td></td> 
-				<td></td> 
-				<td></td> 
-				<td></td> 
-				<td></td> 
-				<td></td> 
-			</tr>
-            <tr>
-              	<td style="text-indent: 15px;">
-                	{{ $data->kd_rincian }}
-            	</td>
-              	<td style="text-indent: 15px;">
-				  	{{ $data->rincian }} 
-            	</td>
-                <td>
-                	{{ $data->vol_anggaran }}
-            	</td>
-                <td>
-                	{{ $data->satuan_anggaran }}
-            	</td>
-                <td>
-					{{"Rp. ".number_format($data->harga_anggaran)}}
-            	</td>
-                <td>
-					{{"Rp. ".number_format($data->total_anggaran)}}
-            	</td>
-                <td>
-                	{{ $data->vol_realisasi }}
-            	</td>
-                <td>
-                	{{ $data->satuan_realisasi }}
-            	</td>
-                <td>
-					{{"Rp. ".number_format($data->harga_realisasi)}}
-            	</td>
-                <td>
-					{{"Rp. ".number_format($data->total_realisasi)}}
-            	</td>
-                <td>
-                	{{ "Rp. ".number_format($data->total_anggaran - $data->total_realisasi) }}
-            	</td>
-            </tr>
+			@if($data->kd_subkeg == $kode)
+				<tr>
+					<td style="text-indent: 15px;">
+						{{ $data->kd_rincian }}
+					</td>
+					<td style="text-indent: 15px;">
+						{{ $data->rincian }} 
+					</td>
+					<td>
+						{{ $data->vol_anggaran }}
+					</td>
+					<td>
+						{{ $data->satuan_anggaran }}
+					</td>
+					<td>
+						{{"Rp. ".number_format($data->harga_anggaran)}}
+					</td>
+					<td>
+						{{"Rp. ".number_format($data->total_anggaran)}}
+					</td>
+					<td>
+						{{ $data->vol_realisasi }}
+					</td>
+					<td>
+						{{ $data->satuan_realisasi }}
+					</td>
+					<td>
+						{{"Rp. ".number_format($data->harga_realisasi)}}
+					</td>
+					<td>
+						{{"Rp. ".number_format($data->total_realisasi)}}
+					</td>
+					<td>
+						{{ "Rp. ".number_format($data->total_anggaran - $data->total_realisasi) }}
+					</td>
+				</tr>
+			@else
+				<tr>
+					<td style="text-indent: 5px;"><b><i>{{ $data->kd_prog }}</i></b></td>
+					<td style="text-indent: 5px;"><b><i>{{ $data->prog }}</i></b</td>
+					<td></td> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+				</tr>
+				<tr>
+					<td style="text-indent: 10px;"><i>{{ $data->kd_keg }}</i></td>
+					<td style="text-indent: 10px;"><i>{{ $data->keg }}</i></td>
+					<td></td> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+				</tr>
+				<tr>
+					<td style="text-indent: 15px;">{{ $data->kd_subkeg }}</td>
+					<td style="text-indent: 15px;">{{ $data->subkeg }}</td>
+					<td></td> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+				</tr>
+				<tr>
+					<td style="text-indent: 15px;">
+						{{ $data->kd_rincian }}
+					</td>
+					<td style="text-indent: 15px;">
+						{{ $data->rincian }} 
+					</td>
+					<td>
+						{{ $data->vol_anggaran }}
+					</td>
+					<td>
+						{{ $data->satuan_anggaran }}
+					</td>
+					<td>
+						{{"Rp. ".number_format($data->harga_anggaran)}}
+					</td>
+					<td>
+						{{"Rp. ".number_format($data->total_anggaran)}}
+					</td>
+					<td>
+						{{ $data->vol_realisasi }}
+					</td>
+					<td>
+						{{ $data->satuan_realisasi }}
+					</td>
+					<td>
+						{{"Rp. ".number_format($data->harga_realisasi)}}
+					</td>
+					<td>
+						{{"Rp. ".number_format($data->total_realisasi)}}
+					</td>
+					<td>
+						{{ "Rp. ".number_format($data->total_anggaran - $data->total_realisasi) }}
+					</td>
+				</tr>
+			@endif
+        	@php ($kode = $data->kd_subkeg)
         @endforeach
 	</tbody>
 </table>
@@ -195,7 +235,11 @@
         <tr>
             <th>CAMAT</th>
             <th style="visibility:hidden">Checked By</th>
-            <th>POSITION NAME</th>
+            @if(Auth::user()->level == 'admin')
+				<th>{{ Auth::user()->name }}</th>
+            @else
+				<th>{{ $getUserInfo->jabatan }}</th>
+			@endif
         </tr>
         <tr>
             <td style="height: 80px"></td>
@@ -205,12 +249,20 @@
         <tr>
             <th class="text-center">DADANG HERMAWAN S S.IP., MAP</th>
             <th style="visibility:hidden" class="text-center">USER NAME</th>
-            <th class="text-center">USER NAME</th>
+            @if(Auth::user()->level == 'admin')
+				<th class="text-center">{{ Auth::user()->name }}</th>
+            @else
+				<th class="text-center">{{ $getUserInfo->name }}</th>
+			@endif
         </tr>
         <tr>
             <th class="text-center">NIP. 196408271991031006</th>
             <td></td>
-            <th class="text-center">NIP. USER NIP</th>
+            @if(Auth::user()->level == 'admin')
+				<th class="text-center">NIP. -</th>
+            @else
+            	<th class="text-center">NIP. {{ $getUserInfo->nip }}</th>
+			@endif
         </tr>
     </table>
 </div>
