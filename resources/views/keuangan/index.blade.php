@@ -85,9 +85,10 @@
                           <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 30px, 0px);">
                             <form action="{{route('transaksi.index')}}" method="get" enctype="multipart/form-data">
                               {{ csrf_field() }}
-                              {{ method_field('put') }}
-                              <button class="dropdown-item"> Lihat Anggaran
-                              </button>
+                              {{ method_field('get') }}
+                              <input style="display:none" type="text" id="bulan" name="bulan" value="{{ $data['no'] }}">
+                              <input style="display:none" type="text" id="id_jabatan" name="id_jabatan" value="{{ $getUserJabatan }}">
+                              <button class="dropdown-item"> Lihat Anggaran</button>
                             </form>  
                           </div>
                         </div>

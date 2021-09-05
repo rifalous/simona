@@ -54,6 +54,7 @@ class KeuanganController extends Controller
             
             if (Auth::user()->level == 'admin')
             {
+                $getUserJabatan = '';
                 $total_anggaran = AnggaranKas::sum('anggaran');
                 $total_realisasi = DetailRealisasi::sum('realisasi');
                 $query1 = AnggaranKas::where('bulan', '<=', $i)->sum('anggaran');
@@ -149,7 +150,7 @@ class KeuanganController extends Controller
         }
 
         // return response()->json($dataKeuangan, 200);
-        return view('keuangan.index', compact('dataKeuangan'));
+        return view('keuangan.index', compact(['dataKeuangan', 'getUserJabatan']));
         // return response()->json(['months', 'anggaran', 'realisasi', 'persenAnggaran', 'persenRealisasi']);
         // return response()->json([$anggaran, $realisasi], 200);
     }

@@ -7,6 +7,7 @@
 
 } );
 </script>
+<script src="{{ url('js/option-instructor.js') }}"></script>
 @stop
 @extends('layouts.app')
 
@@ -31,7 +32,7 @@
                 <div class="card-body">
                   <h4 class="card-title">Data Keuangan - Berdasarkan Kegiatan</h4>
                   <div class="row flex-grow">
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label for="kode_transaksi" class="col-md-12 control-label">Program</label>
                       <div class="col-md-12">
                         <input id="kode_transaksi" type="text" class="form-control" name="kode_transaksi" required>
@@ -57,8 +58,46 @@
                           <strong></strong>
                         </span>
                       </div>
-                    </div>
-                    <div class="form-group">
+                    </div> -->
+                    <table>
+                      <tr>
+                        <td>
+                          <div class="form-group">
+                            <label for="id_program" class="col-md-12 control-label">Program</label>
+                            <select name="id_program" class="form-control select" data-placeholder="Pilih Program" onchange="getKegiatan(this.value)" required="required" data-allow-clear="true">
+                              <option></option>
+                              @foreach ($programs as $program)
+                                <option value="{{ $program['id'] }}">{{ $program['kd_prog'].' - '.$program['nama_prog'] }}</option>
+                              @endforeach
+                            </select>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-group">
+                            <label for="id_kegiatan" class="col-md-12 control-label">Kegiatan</label>
+                            <select name="id_kegiatan" class="form-control select" data-placeholder="Pilih Kegiatan" onchange="getSubKegiatan(this.value)"required="required" data-allow-clear="true"></select>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-group">
+                              <label for="id_subkegiatan" class="col-md-12 control-label">Sub Kegiatan</label>
+                              <select name="id_subkegiatan" class="form-control select" data-placeholder="Pilih Sub Kegiatan" required="required"></select>
+                              <span class="help-block"></span>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <!-- <a href="#" style="margin-bottom:20px"class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-filter"></i> Filter</a> -->
+                        </td>
+                      </tr>
+                    </table >
+
+                    <!-- <div class="form-group">
                       <label for="kode_transaksi" class="col-md-12 control-label">Bulan</label>
                       <div class="col-md-12">
                         <input id="kode_transaksi" type="text" class="form-control" name="kode_transaksi" required>
@@ -75,17 +114,17 @@
                           <strong></strong>
                         </span>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
-                  <a href="#" style="margin-bottom:20px" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-filter"></i> Filter</a>
+                  
                   
                   <div class="table-responsive">
                     <table class="table table-striped" id="table">
                       <thead>
                         <tr>
-                          <th rowspan="2">
+                          <!-- <th rowspan="2">
                             ID Master
-                          </th>
+                          </th> -->
                           <th rowspan="2">
                             Uraian
                           </th>
@@ -129,9 +168,9 @@
                       <tbody>
                       @foreach($getDataAnggaran as $dataAnggaran)
                         <tr>
-                          <td class="py-1">
+                          <!-- <td class="py-1">
                             {{ $dataAnggaran->id_master }}
-                          </td>
+                          </td> -->
                           <td>
                             {{ $dataAnggaran->kd_rincian.' - '.$dataAnggaran->det_rincian }}
                           </td>
@@ -199,3 +238,9 @@
             </div>
           </div>
 @endsection
+
+
+@push('js')
+<script src="{{ url('js/option-instructor.js') }}"></script>
+
+@endpush

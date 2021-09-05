@@ -24,6 +24,8 @@ Route::resource('user', 'UserController');
 
 Route::resource('keuangan', 'KeuanganController');
 Route::resource('transaksi', 'LihatAnggaranController');
+Route::get('transaksi/get_kegiatan/{id_prog}', 'LihatAnggaranController@getKegiatan');
+Route::get('transaksi/get_subkegiatan/{id_keg}', 'LihatAnggaranController@getSubKegiatan');
 
 Route::get('/laporan/ra', 'LaporanController@realisasiAnggaran');
 Route::get('/laporan/ra/pdf', 'LaporanController@realisasiAnggaranPdf');
